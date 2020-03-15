@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const {http, io} = require('./server');
 
 const state = require('./state');
@@ -22,19 +21,4 @@ io.on('disconnect', function(_) {
     state.sendUserCount();
 });
 
-mongoose.connect('mongodb://localhost:27017/polled', mongooseOptions)
-.then(() => {
-    console.log('Mongo connection established');
-})
-.catch((err) => {
-    console.log(`Mongo connection FAILED!: ${err}`);
-})
-.then(() => {
-    return http.listen(port);
-})
-.then(() => {
-    console.log(`Server listening on port ${port}`);
-})
-.catch((err) => {
-    console.log(`Server NOT LISTENING!: ${err}`);
-});
+http.listen(process.env.port || port);

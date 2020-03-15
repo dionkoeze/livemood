@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/main.js",
+  "engines": {
+    "node": "12.x"
+  },
   "scripts": {
     "start": "node src/main.js",
     "dev": "nodemon src/main.js",
@@ -13,7 +16,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.9.4",
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
