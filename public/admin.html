@@ -8,10 +8,15 @@
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <style>
+        .label:hover {
+            background-color: rgba(200, 40, 40, .6);
+        }
+    </style>
 </head>
 <body>
     <div id="header">
-        <h1>Live poll</h1>
+        <h1>Live poll (Admin)</h1>
         <p>Active learners: <span id="user-count"></span></p>
     </div>
     <div id="container">
@@ -19,15 +24,11 @@
             <canvas id="graph"></canvas>
         </div>
         <div id="labels-container">
-            <p id="explanation" class="bordered">Click on a mood to vote for it. Over time your vote gets weaker, but you can click it again. Add a new mood if you like!</p>
-            <div id="add-label">
-                <input type="text" placeholder="Add a new mood" id="add-field" class="bordered">
-                <button id="add-button" class="bordered">add</button>
-            </div>
+            <input type="text" id="secret" class="bordered">
             <div id="labels"></div>
         </div>
     </div>
     <script src="/graph.js"></script>
-    <script src="/index.js"></script>
+    <script src="/admin.js"></script>
 </body>
 </html>

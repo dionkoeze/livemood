@@ -1,23 +1,10 @@
 const socket = io();
 
 $(document).on('click', '.label', function() {
-    socket.emit('vote', $(this).text());
-});
-
-$('#add-field').keyup(function(event) {
-    if ($(this).val().length > 20) {
-        $(this).css('border-color', 'red');
-    } else {
-        $(this).css('border-color', '');
-    }
-
-    if (event.which === 13) {
-        $('#add-button').click()
-    }
-});
-
-$('#add-button').click(function() {
-    socket.emit('vote', $('#add-field').val());
+    console.log('click')
+    $.post(`${$(this).text()}`, {
+        secret: $('#secret').val(),
+    });
 });
 
 socket.on('user-count', function(count) {

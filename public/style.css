@@ -1,37 +1,53 @@
-.header {
-    text-align: center;
-}
-
-.graph-container {
-    border: solid;
-    flex: 2 2 50%;
-    min-width: 0;
-}
-
-.labels-container {
-    flex: 1 2 auto;
-    min-width: 0;
-}
-
-#add-label {
-    text-align: center;
-}
-
 .error {
     color: red;
 }
 
-#add-field {
+.bordered {
     border: solid .2em;
     border-radius: 1em;
     padding: 1em;
-    margin: 0em; 
+}
+
+#header {
+    text-align: center;
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+#graph-container {
+    border: solid;
+    flex: 3 3 10em;
+    margin: 0 .5em;
+}
+
+#labels-container {
+    flex: 1 1 10em;
+    margin: 0 .5em;
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    align-items: baseline;
+}
+
+#explanation {
+    flex: 1 1 auto;
+    width: 20em;
+}
+
+#add-label {
+    flex: 1 1 auto;
+    width: 20em;
+}
+
+#add-field {
+    width: 15em;
 }
 
 #add-button {
-    border: solid .2em;
-    border-radius: 1em;
-    padding: 1em;
     background-color: rgba(40, 200, 40, 0.4);
     cursor: pointer;
 }
@@ -41,19 +57,13 @@
 }
 
 .label {
-    border: solid .2em;
-    border-radius: 1em;
-    list-style-type: none;
-    padding: .3em;
-    margin: .2em;
     background-color: rgba(40, 40, 200, 0.4);
     cursor: pointer;
+    width: 20em;
 }
 
 .label:hover {
     background-color: rgba(40, 40, 200, 0.5);
 }
 
-.container {
-    display: flex;
-}
+
