@@ -6,8 +6,6 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 app.post('/:label', function(req, res) {
-    console.log(req.body.secret)
-    
     if (req.body.secret === process.env.SECRET) {
         state.deleteLabel(req.params.label);
         res.status(200).end();

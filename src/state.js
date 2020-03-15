@@ -60,8 +60,8 @@ module.exports = function(io) {
         }
     }
     
-    function deleteLabel(label) {
-        labels = labels.filter(label => label.default || label.text !== label);
+    function deleteLabel(toDelete) {
+        labels = labels.filter(label => label.default || label.text !== toDelete);
     
         send(io);
     }
