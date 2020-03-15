@@ -5,11 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PollEd</title>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <h1>Test</h1>
-    <script>
-        const socket = io();
-    </script>
+    <div class="header">
+        <h1>Live poll</h1>
+        <p>Active learners: <span id="user-count"></span></p>
+    </div>
+    <div class="container">
+        <div class="graph-container">
+            <canvas id="graph"></canvas>
+        </div>
+        <div class="labels-container">
+            <div id="add-label">
+                <input type="text" placeholder="Add a new mood" id="add-field">
+                <button id="add-button">add</button>
+            </div>
+            <ul id="labels"></ul>
+        </div>
+    </div>
+    <script src="/graph.js"></script>
+    <script src="/index.js"></script>
 </body>
 </html>
