@@ -21,4 +21,4 @@ io.on('disconnect', function(_) {
     state.sendUserCount();
 });
 
-http.listen(process.env.port || port);
+http.listen(process.env.PORT || port);
