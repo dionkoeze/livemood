@@ -77,7 +77,7 @@ module.exports = function(io) {
                 .map(vote => {
                     return {
                         id: vote.id,
-                        weight: vote.weight > 0.2 ? vote.weight * 0.841 : 0,
+                        weight: vote.weight > 0 ? vote.weight - 1.0/12.0 : 0,
                     };
                 })
                 .filter(vote => vote.weight !== 0);
@@ -86,7 +86,7 @@ module.exports = function(io) {
         labels = labels.filter(labelRemains);
     
         send(io);
-    }, 15000);
+    }, 10000);
     
     return {
         sendUserCount,
