@@ -20,6 +20,8 @@ socket.on('label-list', function(labels) {
         $('#labels').append('<p class="label bordered">' + label.text + '</p>');
     });
 
+    labels.sort((a, b) => b.votes - a.votes);
+
     chart.data.labels = labels.map(label => label.text);
     chart.data.datasets[0].data = labels.map(label => label.votes);
     chart.update({duration: 400});

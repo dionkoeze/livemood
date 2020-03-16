@@ -21,8 +21,6 @@ module.exports = function(io) {
             };
         });
     
-        toSend.sort((a, b) => b.votes - a.votes);
-    
         medium.emit('label-list', toSend);
     }
     
@@ -80,7 +78,7 @@ module.exports = function(io) {
                         weight: vote.weight > 0 ? vote.weight - 1.0/12.0 : 0,
                     };
                 })
-                .filter(vote => vote.weight !== 0);
+                .filter(vote => vote.weight >= 0);
         });
     
         labels = labels.filter(labelRemains);
