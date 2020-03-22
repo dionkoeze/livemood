@@ -1,6 +1,6 @@
 module.exports = function(io) {
 
-    let defaultLabels = ['Te snel!', 'Booooring...', 'Cooooool', 'Need... coffee...'];
+    let defaultLabels = ['Te snel!', 'Mag sneller :)', 'Cooooool', 'Need... coffee...'];
     let labels = defaultLabels.map(label => {
         return {
             text: label,
