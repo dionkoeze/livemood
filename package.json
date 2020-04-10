@@ -1,27 +1,37 @@
 {
-  "name": "polled-backend",
-  "version": "1.0.0",
-  "description": "",
-  "main": "src/main.js",
-  "engines": {
-    "node": "12.x"
-  },
+  "name": "livemood",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "node src/main.js",
-    "dev": "nodemon src/main.js",
-    "test": "nodemon --exec \"npm run test-once\"",
-    "test-once": "mocha \"**/*.spec.js\""
+    "run": "node backend/main.js",
+    "dev": "nodemon backend/main.js",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
   },
-  "author": "Dion Koeze",
-  "license": "ISC",
   "dependencies": {
+    "core-js": "^3.6.4",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "socket.io": "^2.3.0"
+    "mongoose": "^5.9.7",
+    "nodemon": "^2.0.2",
+    "socketio": "^1.0.0",
+    "vue": "^2.6.11",
+    "vue-router": "^3.1.6",
+    "vue-socket.io": "^3.0.7",
+    "vuex": "^3.1.3"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
-    "mocha": "^7.1.0",
-    "nodemon": "^2.0.2"
+    "@vue/cli-plugin-babel": "^4.3.0",
+    "@vue/cli-plugin-eslint": "^4.3.0",
+    "@vue/cli-plugin-router": "^4.3.0",
+    "@vue/cli-plugin-vuex": "^4.3.0",
+    "@vue/cli-service": "^4.3.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
   }
 }
