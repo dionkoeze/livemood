@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "run": "node backend/main.js",
+    "start": "node backend/main.js",
     "dev": "nodemon backend/main.js",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
