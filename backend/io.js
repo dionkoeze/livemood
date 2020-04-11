@@ -25,7 +25,7 @@ function roomsWithParticipants() {
 
 setInterval(() => {
     io.emit('rooms', roomsWithParticipants());
-}, 10000)
+}, 1000)
 
 io.on('connection', (socket) => {
     let room;
@@ -37,7 +37,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('join', (name) => {
-        console.log(`socket joined ${name}`)
         socket.leave(room);
         room = name;
         socket.join(room);
@@ -46,13 +45,11 @@ io.on('connection', (socket) => {
     });
 
     socket.on('leave', () => {
-        console.log(`socket left ${room}`);
         socket.leave(room);
         io.emit('rooms', roomsWithParticipants());
     });
 
     socket.on('vote', (text) => {
-        console.log(`voted on ${text}`);
         state.vote(room, text, socket.id);
     });
 
@@ -64,6 +61,7 @@ io.on('connection', (socket) => {
 
     socket.on('alive', (name) => {
         state.refresh(name);
+        io.emit('rooms', roomsWithParticipants());
     });
 });
 

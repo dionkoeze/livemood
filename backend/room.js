@@ -80,9 +80,8 @@ class Room {
         ];
 
         this.int = setInterval(() => {
-            console.log('update');
             this.send();
-        }, 10000);
+        }, 1000);
 
         this.send();
     }
@@ -105,7 +104,6 @@ class Room {
     }
 
     destroy() {
-        console.log(`${this.name} destroyed`);
         clearInterval(this.int);
     }
 
@@ -137,17 +135,11 @@ class Room {
         }, {});
 
         for (let person in personal) {
-            console.log(person)
-            console.log(personal[person])
             this.io.to(person).emit('myvotes', personal[person]);
         }
-
-        console.log(personal);
     }
 
     vote(text, id) {
-        console.log(`voted on ${text} in room ${this.name} by ${id}`);
-
         this.refreshTTL();
 
         if (this.labels.length < 10 && isValidText(text)) {
@@ -160,8 +152,6 @@ class Room {
             }
 
             label.vote(id);
-            
-            console.log(label);
             
             this.send();
         }

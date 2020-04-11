@@ -1,0 +1,5 @@
+#0D3B66 : dark blue
+#FAF0CA : cream
+#F4D35E : yellow
+#EE964B : orange
+#F95738 : darker orange

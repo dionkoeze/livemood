@@ -1,7 +1,6 @@
 <template>
   <div class="rooms-list">
     <h3>Rooms</h3>
-    <button v-on:click="newRoom">New room</button>
     <div class="list">
       <RoomEntry
         v-for="room in $store.getters.rooms"
@@ -9,6 +8,7 @@
         :name="room.name"
         :participants="room.participants"></RoomEntry>
     </div>
+    <button class="btn" v-on:click="newRoom">New room</button>
   </div>
 </template>
 
@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     newRoom() {
-      console.log('creating...');
       this.$router.push('/create');
     },
   },
@@ -31,8 +30,9 @@ export default {
 
 <style scoped>
 .rooms-list {
-  background-color: rgb(202, 201, 201);
+  background-color: #F4D35E;
   height: 100vh;
+  padding: 1em;
 }
 
 button {

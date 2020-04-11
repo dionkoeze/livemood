@@ -9,6 +9,8 @@ export default new Vuex.Store({
     votes: [],
     myVotes: [],
     room: '',
+    isAdmin: false,
+    authCooldown: 0,
   },
   getters: {
     room(state) {
@@ -55,14 +57,12 @@ export default new Vuex.Store({
   actions: {
     goToRoom({ commit, state }, name) {
       if (state.room) {
-        // console.log(`left room ${state.room}`);
         /* eslint-disable no-underscore-dangle */
         this._vm.$socket.emit('leave', state.room);
         /* eslint-enable no-underscore-dangle */
         commit('changeRoom', '');
       }
       if (name) {
-        // console.log(`joined room ${name}`);
         /* eslint-disable no-underscore-dangle */
         this._vm.$socket.emit('join', name);
         /* eslint-enable no-underscore-dangle */
@@ -70,7 +70,6 @@ export default new Vuex.Store({
       }
     },
     socket_rooms({ commit }, rooms) {
-      // console.log(rooms);
       commit('setRooms', rooms);
     },
     socket_votes({ commit }, votes) {

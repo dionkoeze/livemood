@@ -1,7 +1,7 @@
 <template>
   <div class="room">
     <h1>{{$store.getters.room.name}}</h1>
-    <p>{{$store.getters.room.participants}} participants are in this room.</p>
+    <p>{{participants}} in this room.</p>
     <p class="explain">
       Click the button to tell how you're feeling. You can only vote once,
       but as your vote decreases over time you can vote again.<br>
@@ -11,7 +11,7 @@
     </p>
     <div class="warn" v-if="$store.getters.room.TTL<150000">
       Room is almost closing! You have {{$store.getters.room.humanTTL}} min left.
-      <button class="alive" v-on:click="keepAlive">Click to keep room alive</button>
+      <button class="btn alive" v-on:click="keepAlive">Click to keep room alive</button>
     </div>
     <transition-group tag="div" name="list">
       <Vote
@@ -21,7 +21,7 @@
         :max="$store.getters.room.participants"></Vote>
       <div key="zzzz">
         <input type="text" v-model="text" placeholder="new label" v-on:keyup.enter="create">
-        <button v-on:click="create" :disabled="text===''">Add</button>
+        <button class="btn" v-on:click="create" :disabled="text===''">Add</button>
       </div>
     </transition-group>
   </div>
@@ -41,8 +41,20 @@ export default {
     };
   },
   mounted() {
-    console.log(`created room comp ${this.$route.params.name}`);
     this.$store.dispatch('goToRoom', this.$route.params.name);
+  },
+  computed: {
+    participants() {
+      let result;
+      if (this.$store.getters.room.participants === 0) {
+        result = 'no participants are';
+      } else if (this.$store.getters.room.participants === 1) {
+        result = '1 participant is';
+      } else {
+        result = `${this.$store.getters.room.participants} participants are`;
+      }
+      return result;
+    },
   },
   methods: {
     create() {
@@ -57,12 +69,10 @@ export default {
   },
   watch: {
     $route() {
-      console.log(`changed room to ${this.$route.params.name}`);
       this.$store.dispatch('goToRoom', this.$route.params.name);
     },
   },
   beforeDestroy() {
-    console.log('leave room');
     this.$store.dispatch('goToRoom', '');
   },
 };
@@ -101,23 +111,22 @@ export default {
   padding: 1em;
   justify-content: center;
   color: red;
-  background-color: rgb(241, 165, 165);
-  border: .2em solid red;
+  background-color: #EE964B;
+  border: .2em solid #F95738;
   border-radius: 1em;
 }
 
 .alive {
-  background-color: rgb(131, 192, 107);
-  border: .2em solid green;
+  background-color: #F4D35E;
+  color: #0D3B66;
+  border: .2em solid #0D3B66;
   border-radius: 1em;
-}
-
-.alive:hover {
-  cursor: pointer;
+  margin: 1em;
 }
 
 .explain {
   font-size: .8em;
-  width: 50%;
+  width: 70%;
+  margin: 2em;
 }
 </style>
