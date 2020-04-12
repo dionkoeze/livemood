@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     authenticate() {
-
+      this.$socket.emit('auth', this.password);
     },
   },
 };

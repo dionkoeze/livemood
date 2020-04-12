@@ -1,4 +1,5 @@
 const Room = require('./room');
+const {isValidName} = require('./vote_validation');
 
 function leadingZero(val) {
     if (val < 10) {
@@ -19,7 +20,7 @@ function create_state() {
     let rooms = [];
     
     function create(name, medium) {
-        if (rooms.length < 10 && name.length < 10 && !rooms.find(room => room.name === name)) {
+        if (rooms.length < 10 && isValidName(name) && !rooms.find(room => room.name === name)) {
             rooms.push(new Room(name, medium));
         }
     }
@@ -56,11 +57,16 @@ function create_state() {
         }
     }
 
+    function purge(id) {
+        rooms.forEach((room) => room.purge(id));
+    }
+
     return {
         create,
         list,
         vote,
         refresh,
+        purge,
     }
 }
 

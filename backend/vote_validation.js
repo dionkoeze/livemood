@@ -14,4 +14,23 @@ function isValidText(text) {
     return true;
 }
 
-module.exports = isValidText;
+function isValidName(name) {
+    if (name.length > 10) {
+        return false;
+    }
+
+    if (! /\S/.test(name)) {
+        return false;
+    }
+
+    if (/<.*>/.test(name)) {
+        return false;
+    }
+
+    return true;
+}
+
+module.exports = {
+    isValidText,
+    isValidName,
+};

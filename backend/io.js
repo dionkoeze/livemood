@@ -34,6 +34,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         socket.leave(room);
+        state.purge(socket.id);
     });
 
     socket.on('join', (name) => {

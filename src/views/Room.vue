@@ -3,7 +3,7 @@
     <h1>{{$store.getters.room.name}}</h1>
     <p>{{participants}} in this room.</p>
     <p class="explain">
-      Click the button to tell how you're feeling. You can only vote once,
+      Click the orange button to tell how you're feeling. You can only vote once,
       but as your vote decreases over time you can vote again.<br>
       The bars on the right show everyone's votes. The votes you've casted at the moment
       are visible in the buttons.<br>
@@ -18,7 +18,7 @@
         v-for="vote in $store.getters.votes"
         :key="vote.text"
         :vote="vote"
-        :max="$store.getters.room.participants"></Vote>
+        :max="maxVal"></Vote>
       <div key="zzzz">
         <input type="text" v-model="text" placeholder="new label" v-on:keyup.enter="create">
         <button class="btn" v-on:click="create" :disabled="addInvalid">Add</button>
@@ -54,6 +54,15 @@ export default {
         result = `${this.$store.getters.room.participants} participants are`;
       }
       return result;
+    },
+    maxVal() {
+      const maxVotes = this.$store.getters.votes.reduce((acc, cur) => {
+        if (cur.votes > acc) {
+          return cur.votes;
+        }
+        return acc;
+      }, 0);
+      return Math.max(this.$store.getters.room.participants, maxVotes);
     },
     addInvalid() {
       return this.text === '' || this.$store.getters.votes.length > 9;

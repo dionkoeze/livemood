@@ -1,9 +1,13 @@
 <template>
   <div id="vote">
     <div id="entry">
-      <button class="btn vote-btn" v-on:click="submit">{{vote.text}}</button>
+      <button
+        class="btn vote-btn"
+        v-on:click="submit"
+        :style="{backgroundPosition: `${100-vote.mine*100}% 100%`}">{{vote.text}}</button>
+        <!--  -->
       <div id="bar">
-        <span :style="{width: vote.votes/max*100 + '%'}" id="filled"></span>
+        <span :style="{width: `${vote.votes/max*100}%`}" id="filled"></span>
       </div>
     </div>
   </div>
@@ -54,6 +58,9 @@ export default {
   width: 15em;
   padding: .2em;
   color: #0D3B66;
-  background-color: #F95738;
+  /* background-color: #EE964B; */
+  background: linear-gradient(to right, #F95738 50%, #EE964B 50%);
+  background-size: 200% 100%;
+  background-position: right bottom;
 }
 </style>

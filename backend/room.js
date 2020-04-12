@@ -1,4 +1,4 @@
-const isValidText = require('./vote_validation');
+const {isValidText} = require('./vote_validation');
 
 class Vote {
     constructor(id) {
@@ -42,6 +42,10 @@ class Label {
 
     stays() {
         return this.weight() > 0.01 || this.default;
+    }
+
+    purge(id) {
+        this.votes = this.votes.filter(vote => vote.id !== id);
     }
 
     vote(id) {
@@ -105,6 +109,10 @@ class Room {
 
     destroy() {
         clearInterval(this.int);
+    }
+
+    purge(id) {
+        this.labels.forEach((label) => label.purge(id));
     }
 
     send() {
