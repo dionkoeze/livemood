@@ -48,6 +48,10 @@ class Label {
         this.votes = this.votes.filter(vote => vote.id !== id);
     }
 
+    clear() {
+        this.votes = []
+    }
+
     vote(id) {
         let vote = this.votes.find(vote => vote.id === id);
 
@@ -115,17 +119,20 @@ class Room {
         this.labels.forEach((label) => label.purge(id));
     }
 
-    send() {
+    sendVotes() {
         this.labels = this.labels.filter(label => label.stays());
-
+    
         const toSend = this.labels.map(label => {
             return {
                 ...label,
                 votes: label.weight(),
             };
         });
-
+    
         this.io.to(this.name).emit('votes', toSend);
+    }
+
+    sendPersonal() {
         let personal = this.labels.reduce((acc, cur) => {
             cur.votes.forEach((vote) => {
                 if (!acc[vote.id]) {
@@ -135,16 +142,19 @@ class Room {
                     text: cur.text,
                     vote: vote.weight(),
                 })
-                // acc[vote.id].text = cur.text;
-                // acc[vote.id].vote = vote.weight();
             });
-
+    
             return acc;
         }, {});
-
+    
         for (let person in personal) {
             this.io.to(person).emit('myvotes', personal[person]);
         }
+    }
+
+    send() {
+        this.sendVotes();
+        this.sendPersonal();
     }
 
     vote(text, id) {
@@ -166,7 +176,28 @@ class Room {
     }
 
     remove(text) {
-        this.labels = this.labels.filter(label => label.text !== text);
+        this.labels = this.labels.filter(label => label.default || label.text !== text);
+    }
+
+    clear(text) {
+        const found = this.labels.find(label => label.text === text);
+
+        if (found) {
+
+
+            found.clear();
+
+
+            // this.io.to(person).emit('myvotes', []);
+        }
+    }
+
+    setDefault(text, isDefault) {
+        const found = this.labels.find(label => label.text === text);
+
+        if (found) {
+            found.default = isDefault;
+        }
     }
 };
 

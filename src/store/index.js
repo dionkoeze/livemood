@@ -10,7 +10,8 @@ export default new Vuex.Store({
     myVotes: [],
     room: '',
     isAdmin: false,
-    authCooldown: 0,
+    authTries: 0,
+    authTime: new Date(),
   },
   getters: {
     room(state) {
@@ -39,6 +40,15 @@ export default new Vuex.Store({
         };
       });
     },
+    authState(state) {
+      return {
+        tries: state.authTries,
+        time: state.authTime,
+      };
+    },
+    isAdmin(state) {
+      return state.isAdmin;
+    },
   },
   mutations: {
     changeRoom(state, name) {
@@ -52,6 +62,16 @@ export default new Vuex.Store({
     },
     setMyVotes(state, myVotes) {
       state.myVotes = myVotes;
+    },
+    isAdmin(state) {
+      state.isAdmin = true;
+    },
+    isNotAdmin(state) {
+      state.isAdmin = false;
+    },
+    logInAttempt(state) {
+      state.authTime = new Date();
+      state.authTries += 1;
     },
   },
   actions: {
@@ -77,6 +97,19 @@ export default new Vuex.Store({
     },
     socket_myvotes({ commit }, myVotes) {
       commit('setMyVotes', myVotes);
+    },
+    socket_authState({ commit }, authState) {
+      if (authState.isAdmin) {
+        commit('isAdmin');
+      } else {
+        commit('isNotAdmin');
+      }
+    },
+    logIn({ commit }, password) {
+      /* eslint-disable no-underscore-dangle */
+      this._vm.$socket.emit('auth', password);
+      /* eslint-enable no-underscore-dangle */
+      commit('logInAttempt');
     },
   },
   modules: {

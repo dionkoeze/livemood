@@ -9,17 +9,46 @@
       <div id="bar">
         <span :style="{width: `${vote.votes/max*100}%`}" id="filled"></span>
       </div>
+      <ConfirmButton
+        v-if="$store.getters.isAdmin"
+        v-on:clicked="clear">clear</ConfirmButton>
+      <ConfirmButton
+        v-if="$store.getters.isAdmin && !vote.default"
+        v-on:clicked="pin">pin</ConfirmButton>
+      <ConfirmButton
+        v-if="$store.getters.isAdmin && vote.default"
+        v-on:clicked="unpin">unpin</ConfirmButton>
+      <ConfirmButton
+        v-if="$store.getters.isAdmin && !vote.default"
+        v-on:clicked="remove">delete</ConfirmButton>
     </div>
   </div>
 </template>
 
 <script>
+import ConfirmButton from '@/components/ConfirmButton.vue';
+
 export default {
   name: 'vote',
+  components: {
+    ConfirmButton,
+  },
   props: ['vote', 'max'],
   methods: {
     submit() {
       this.$socket.emit('vote', this.vote.text);
+    },
+    remove() {
+      this.$socket.emit('removeText', this.$store.getters.room.name, this.vote.text);
+    },
+    clear() {
+      this.$socket.emit('clear', this.$store.getters.room.name, this.vote.text);
+    },
+    pin() {
+      this.$socket.emit('default', this.$store.getters.room.name, this.vote.text, true);
+    },
+    unpin() {
+      this.$socket.emit('default', this.$store.getters.room.name, this.vote.text, false);
     },
   },
 };
@@ -37,7 +66,7 @@ export default {
 }
 
 #bar {
-  height: 1.7em;
+  height: auto;
   width: 20em;
   background: #F4D35E;
   border-radius: .5em;

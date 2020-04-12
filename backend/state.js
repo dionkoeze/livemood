@@ -24,6 +24,10 @@ function create_state() {
             rooms.push(new Room(name, medium));
         }
     }
+
+    function removeRoom(name) {
+        rooms = rooms.filter((room) => room.name !== name);
+    }
     
     function list() {
         rooms.forEach(room => {
@@ -41,32 +45,74 @@ function create_state() {
                 };
             });
     }
-    
-    function vote(room, text, id) {
-        const found = rooms.find((cur) => cur.name === room);
-        if (found) {
-            found.vote(text, id);
-        }
-    }
 
-    function refresh(room) {
-        const found = rooms.find((cur) => cur.name === room);
+    function applyToRoom(name, func) {
+        const found = rooms.find((cur) => cur.name === name);
         if (found) {
+            func(found);
             found.refreshTTL();
             found.send();
         }
+    }
+    
+    function vote(name, text, id) {
+        applyToRoom(name, (room) => {
+            room.vote(text, id);
+        });
+        // const found = rooms.find((cur) => cur.name === room);
+        // if (found) {
+        //     found.refreshTTL();
+        //     found.vote(text, id);
+        // }
+    }
+
+    function removeText(name, text) {
+        applyToRoom(name, (room) => {
+            room.remove(text);
+        });
+        // const found = rooms.find((cur) => cur.name === name);
+        // if (found) {
+        //     found.remove(text);
+        //     found.refreshTTL();
+        //     found.send();
+        // }
+    }
+
+    function refresh(room) {
+        applyToRoom(room, () => {});
+        // const found = rooms.find((cur) => cur.name === room);
+        // if (found) {
+        //     found.refreshTTL();
+        //     found.send();
+        // }
     }
 
     function purge(id) {
         rooms.forEach((room) => room.purge(id));
     }
 
+    function setDefault(name, text, isDefault) {
+        applyToRoom(name, (room) => {
+            room.setDefault(text, isDefault);
+        })        
+    }
+
+    function clear(name, text) {
+        applyToRoom(name, (room) => {
+            room.clear(text);
+        });
+    }
+
     return {
         create,
+        removeRoom,
         list,
         vote,
+        removeText,
         refresh,
         purge,
+        setDefault,
+        clear,
     }
 }
 

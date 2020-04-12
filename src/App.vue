@@ -5,7 +5,10 @@
       <router-link class="btn nav-btn" to="/">Home</router-link>
       <router-link class="btn nav-btn" to="/admin">Admin</router-link>
       <transition name='name'>
-        <span class="name" v-if="$route.name!=='Home'">Live mood meter</span>
+        <span class="name" v-if="$route.name!=='Home'">
+          <img v-if="$store.getters.isAdmin" id="lock" src="lock.png"/>
+          Live mood meter
+        </span>
       </transition>
     </div>
     <div id="side">
@@ -100,5 +103,9 @@ export default {
 
 .name-enter, .name-leave-to {
   opacity: 0;
+}
+
+#lock {
+  height: 1em;
 }
 </style>

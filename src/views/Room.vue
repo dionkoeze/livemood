@@ -13,6 +13,7 @@
       Room is almost closing! You have {{$store.getters.room.humanTTL}} min left.
       <button class="btn alive" v-on:click="keepAlive">Click to keep room alive</button>
     </div>
+    <RoomSettings id="settings" v-if="$store.getters.isAdmin"></RoomSettings>
     <transition-group tag="div" name="list">
       <Vote
         v-for="vote in $store.getters.votes"
@@ -29,11 +30,13 @@
 
 <script>
 import Vote from '@/components/Vote.vue';
+import RoomSettings from '@/components/RoomSettings.vue';
 
 export default {
   name: 'room',
   components: {
     Vote,
+    RoomSettings,
   },
   data() {
     return {
@@ -140,5 +143,9 @@ export default {
   font-size: .8em;
   width: 70%;
   margin: 2em;
+}
+
+#settings {
+  margin: 1em;
 }
 </style>
