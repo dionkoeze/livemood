@@ -8,7 +8,9 @@ Vue.config.productionTip = false;
 
 Vue.use(new VueSocketIO({
   debug: false,
-  connection: 'localhost:3000',
+  // connection: `${process.env.URL}`,
+  // connection: 'localhost:3000',
+  connection: 'https://livemood.herokuapp.com',
   vuex: {
     store,
     actionPrefix: 'socket_',
