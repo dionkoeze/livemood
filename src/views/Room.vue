@@ -21,7 +21,7 @@
         :max="$store.getters.room.participants"></Vote>
       <div key="zzzz">
         <input type="text" v-model="text" placeholder="new label" v-on:keyup.enter="create">
-        <button class="btn" v-on:click="create" :disabled="text===''">Add</button>
+        <button class="btn" v-on:click="create" :disabled="addInvalid">Add</button>
       </div>
     </transition-group>
   </div>
@@ -55,10 +55,13 @@ export default {
       }
       return result;
     },
+    addInvalid() {
+      return this.text === '' || this.$store.getters.votes.length > 9;
+    },
   },
   methods: {
     create() {
-      if (this.text) {
+      if (!this.addInvalid) {
         this.$socket.emit('vote', this.text);
         this.text = '';
       }

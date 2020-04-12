@@ -6,7 +6,7 @@ const io = require('socket.io')(http);
 const state = require('./state')(io);
 
 // test
-state.create('testRoom', io.to('testRoom'));
+// state.create('testRoom', io.to('testRoom'));
 
 // io.origins('*:*');
 

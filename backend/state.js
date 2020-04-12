@@ -19,7 +19,7 @@ function create_state() {
     let rooms = [];
     
     function create(name, medium) {
-        if (rooms.length < 20 && name.length < 10 && !rooms.find(room => room.name === name)) {
+        if (rooms.length < 10 && name.length < 10 && !rooms.find(room => room.name === name)) {
             rooms.push(new Room(name, medium));
         }
     }

@@ -8,7 +8,7 @@
         :name="room.name"
         :participants="room.participants"></RoomEntry>
     </div>
-    <button class="btn" v-on:click="newRoom">New room</button>
+    <button class="btn" v-on:click="newRoom" :disabled="newRoomIsvalid">New room</button>
   </div>
 </template>
 
@@ -23,6 +23,11 @@ export default {
   methods: {
     newRoom() {
       this.$router.push('/create');
+    },
+  },
+  computed: {
+    newRoomIsvalid() {
+      return this.$store.getters.rooms.length >= 10;
     },
   },
 };

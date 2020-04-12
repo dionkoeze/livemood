@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     valid() {
-      return this.name && this.name.length < 10;
+      return this.name && this.name.length < 10 && this.$store.getters.rooms.length < 10;
     },
   },
   methods: {

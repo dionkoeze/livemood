@@ -60,9 +60,9 @@ class Room {
     constructor(name, io) {
         const cool = new Label('Coooooool!');
         cool.default = true;
-        const sneller = new Label('Mag sneller :)');
+        const sneller = new Label('A little quicker :)');
         sneller.default = true;
-        const tesnel = new Label('Te snel!');
+        const tesnel = new Label('Too fast!');
         tesnel.default = true;
         const coffee = new Label('Need... coffee...');
         coffee.default = true;

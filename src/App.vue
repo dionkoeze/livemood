@@ -50,6 +50,10 @@ export default {
   filter: brightness(140%);
   cursor: pointer;
 }
+
+.btn:disabled {
+  filter: brightness(50%);
+}
 </style>
 
 <style scoped>
