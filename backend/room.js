@@ -89,7 +89,7 @@ class Room {
 
         this.int = setInterval(() => {
             this.send();
-        }, 1000);
+        }, 10000);
 
         this.send();
     }

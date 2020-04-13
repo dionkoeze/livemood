@@ -25,7 +25,7 @@ function roomsWithParticipants() {
 
 setInterval(() => {
     io.emit('rooms', roomsWithParticipants());
-}, 1000)
+}, 10000)
 
 io.on('connection', (socket) => {
     let room;
