@@ -15,7 +15,7 @@ function isValidText(text) {
 }
 
 function isValidName(name) {
-    if (name.length > 10) {
+    if (name.length > 20) {
         return false;
     }
 
