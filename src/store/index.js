@@ -92,11 +92,15 @@ export default new Vuex.Store({
     socket_rooms({ commit }, rooms) {
       commit('setRooms', rooms);
     },
-    socket_votes({ commit }, votes) {
-      commit('setVotes', votes);
+    socket_votes({ commit, state }, votes) {
+      if (votes.name === state.room) {
+        commit('setVotes', votes.votes);
+      }
     },
-    socket_myvotes({ commit }, myVotes) {
-      commit('setMyVotes', myVotes);
+    socket_myvotes({ commit, state }, myVotes) {
+      if (myVotes.name === state.room) {
+        commit('setMyVotes', myVotes.votes);
+      }
     },
     socket_authState({ commit }, authState) {
       if (authState.isAdmin) {

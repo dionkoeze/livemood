@@ -1,0 +1,5 @@
+bugs:
+last myvote does not go away on clear
+
+requests:
+add settings to admin mode?

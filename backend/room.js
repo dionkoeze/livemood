@@ -129,7 +129,10 @@ class Room {
             };
         });
     
-        this.io.to(this.name).emit('votes', toSend);
+        this.io.to(this.name).emit('votes', {
+            name: this.name,
+            votes: toSend,
+        });
     }
 
     sendPersonal() {
@@ -148,7 +151,10 @@ class Room {
         }, {});
     
         for (let person in personal) {
-            this.io.to(person).emit('myvotes', personal[person]);
+            this.io.to(person).emit('myvotes', {
+                name: this.name,
+                votes: personal[person],
+            });
         }
     }
 
