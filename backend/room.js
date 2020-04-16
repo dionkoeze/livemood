@@ -166,19 +166,23 @@ class Room {
     vote(text, id) {
         this.refreshTTL();
 
-        if (this.labels.length < 10 && isValidText(text)) {
-            let label = this.labels.find(label => label.text === text);
+        let label = this.labels.find(label => label.text === text);
 
-            if (!label) {
+        
+        if (!label) {
+            if (this.labels.length < 16 && isValidText(text)) {
                 label = new Label(text);
 
                 this.labels.push(label);
+            } else {
+                return;
             }
 
-            label.vote(id);
-            
-            this.send();
         }
+        
+        label.vote(id);
+        
+        this.send();
     }
 
     remove(text) {

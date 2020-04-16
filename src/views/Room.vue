@@ -68,7 +68,7 @@ export default {
       return Math.max(this.$store.getters.room.participants, maxVotes);
     },
     addInvalid() {
-      return this.text === '' || this.$store.getters.votes.length > 9;
+      return this.text === '' || this.$store.getters.votes.length > 15;
     },
   },
   methods: {
