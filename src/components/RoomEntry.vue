@@ -19,7 +19,7 @@ export default {
   props: ['name', 'participants'],
   methods: {
     go() {
-      this.$router.push(`/room/${this.name}`);
+      this.$router.push(`/room/${encodeURIComponent(this.name)}`);
     },
     remove() {
       this.$socket.emit('removeRoom', this.name);

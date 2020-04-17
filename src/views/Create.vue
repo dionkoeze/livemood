@@ -27,7 +27,7 @@ export default {
     create() {
       if (this.valid) {
         this.$socket.emit('create', this.name);
-        this.$router.push(`/room/${this.name}`);
+        this.$router.push(`/room/${encodeURIComponent(this.name)}`);
       }
     },
   },
